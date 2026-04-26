@@ -16,8 +16,9 @@ export const addBirthday = async (req: Request, res: Response) => {
 
     const createdBirthday = await birthday.save();
     res.status(201).json(createdBirthday);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
+  } catch (error: any) {
+    console.error('Error saving birthday:', error);
+    res.status(500).json({ message: 'Server Error', error: error.message || error });
   }
 };
 
