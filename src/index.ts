@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db';
 import birthdayRoutes from './routes/birthdayRoutes';
+import cronRoutes from './routes/cronRoutes';
 import { startCronJob } from './jobs/cronJob';
 
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/birthdays', birthdayRoutes);
+app.use('/api/cron', cronRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
