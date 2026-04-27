@@ -3,7 +3,7 @@ import Birthday from '../models/Birthday';
 import { sendBirthdayReminderEmail } from '../services/emailService';
 
 export const startCronJob = () => {
-  cron.schedule('10 9 * * *', async () => {
+  cron.schedule('20 9 * * *', async () => {
     console.log('Running daily birthday check...');
     try {
       const tomorrow = new Date();
