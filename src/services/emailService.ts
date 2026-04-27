@@ -29,10 +29,20 @@ export const sendBirthdayReminderEmail = async (name: string, date: Date) => {
     `,
   };
 
-  try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Reminder email sent for ${name}`);
-  } catch (error) {
-    console.error('Error sending email:', error);
+  let retries = 5;
+  while (retries > 0) {
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log(`Reminder email sent for ${name}`);
+      return;
+    } catch (error) {
+      retries--;
+      console.error(`Error sending email for ${name}. Retries left: ${retries}`, error);
+      if (retries === 0) {
+        console.error(`Failed to send email for ${name} after 5 attempts.`);
+        throw error;
+      }
+      await new Promise(res => setTimeout(res, 1000));
+    }
   }
 };
