@@ -22,6 +22,12 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
+app.get('/api/cron/check-birthdays', (req, res) => {
+    console.log("Cron job started...");
+    startCronJob();
+    res.status(200).send("Cron Job Executed");
+});
+
 if (process.env.NODE_ENV !== 'production') {
   startCronJob();
   const PORT = process.env.PORT || 5000;
