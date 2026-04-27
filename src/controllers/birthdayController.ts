@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import Birthday from '../models/Birthday';
+import connectDB from '../config/db';
 
 export const addBirthday = async (req: Request, res: Response) => {
   try {
+    await connectDB();
     const { name, date } = req.body;
 
     if (!name || !date) {
@@ -24,6 +26,7 @@ export const addBirthday = async (req: Request, res: Response) => {
 
 export const getBirthdays = async (req: Request, res: Response) => {
   try {
+    await connectDB();
     const birthdays = await Birthday.find({});
     res.json(birthdays);
   } catch (error) {

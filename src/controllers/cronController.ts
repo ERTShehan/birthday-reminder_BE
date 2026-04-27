@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import Birthday from '../models/Birthday';
 import { sendBirthdayReminderEmail } from '../services/emailService';
+import connectDB from '../config/db';
 
 export const checkBirthdays = async (req: Request, res: Response) => {
   console.log('Running Vercel cron job to check birthdays...');
 
   try {
+    await connectDB();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     
