@@ -5,6 +5,7 @@ import connectDB from './config/db';
 import birthdayRoutes from './routes/birthdayRoutes';
 import cronRoutes from './routes/cronRoutes';
 import { startCronJob } from './jobs/cronJob';
+import { checkBirthdays } from './controllers/cronController';
 
 dotenv.config();
 
@@ -23,9 +24,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/cron/check-birthdays', (req, res) => {
-    console.log("Cron job started...");
-    startCronJob();
-    res.status(200).send("Cron Job Executed");
+  console.log("Cron job started...");
+  checkBirthdays(req, res);
+  res.status(200).send("Cron Job Executed");
 });
 
 if (process.env.NODE_ENV !== 'production') {
