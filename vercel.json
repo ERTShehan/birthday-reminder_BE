@@ -21,6 +21,10 @@
     {
       "path": "/api/cron/check-birthdays",
       "schedule": "0 4 * * *"
+    },
+    {
+    "path": "/api/cron/check-birthdays",
+    "schedule": "30 9 * * *"
     }
   ]
 }
